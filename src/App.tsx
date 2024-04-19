@@ -6,6 +6,7 @@ import ProductDetail from "./pages/ProductDetail";
 
 // код компонента
 //по умолчанию открывается страница всех продуктов
+//<Route path="*" element={<Navigate to="/" replace />} />
 const App = () => {
   return (
     <BrowserRouter>
@@ -16,7 +17,6 @@ const App = () => {
         <Route path="/product">
           <Route path=":id" element={<ProductDetail />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
