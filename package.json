@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://alexl-1.github.io/hw3",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
