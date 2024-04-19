@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-//import '../styles/styles.css';
+import styles from "./Input.module.scss";
 
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'onChange' | 'value'
+  "onChange" | "value"
 > & {
   /** Значение поля */
   value: string;
@@ -15,20 +15,10 @@ export type InputProps = Omit<
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, style, ...props }: InputProps, ref) => {
-    var styles2 = {};
-    if (afterSlot) {
-      //убрать правый border, добавить справа div, в центр div запихнуть
-      if (!style) style = {};
-      style['borderRightWidth'] = '0px';
-      styles2 = {
-        borderLeftWidth: '0px',
-        width: 'auto',
-        display: 'inline-block',
-        height: '52px',
-        verticalAlign: 'top',
-      };
-    }
+  ({ value, onChange, afterSlot, className, ...props }: InputProps, ref) => {
+    let classNameString: string = styles.input;
+    classNameString += " " + styles.input;
+    if (afterSlot) classNameString += " " + styles.inputLoading;
 
     return (
       <>
@@ -39,14 +29,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange(e.target.value);
           }}
           ref={ref}
-          style={style}
+          className={classNameString}
           {...props}
         />
         {afterSlot && (
-          <div style={styles2}>
-            <div style={{ marginTop: '16px', marginRight: '5px' }}>
-              {afterSlot}
-            </div>
+          <div>
+            <div>{afterSlot}</div>
           </div>
         )}
       </>

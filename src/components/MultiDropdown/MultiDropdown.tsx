@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Input from '../Input';
-import ArrowDownIcon from '../icons/ArrowDownIcon';
+import React, { useEffect, useRef, useState } from "react";
+import Input from "../Input";
+import ArrowDownIcon from "../icons/ArrowDownIcon";
+
+import styles from "./MultiDropdown.module.scss";
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -33,7 +35,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   getTitle,
 }: MultiDropdownProps) => {
   const inputStringState = (arr: Option[]): string => {
-    let output: string = '';
+    let output: string = "";
     if (arr.length > 0) output = getTitle(arr);
     return output;
   };
@@ -49,14 +51,14 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   };
 
   let [isExpanded, Toggle] = useState(false);
-  let [filter, SetFilter] = useState('');
+  let [filter, SetFilter] = useState("");
   let [selectedItems, SetSelectedItems] = useState([...value]);
 
   const newRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   });
   const handleOutsideClick = (e: any) => {
@@ -100,20 +102,20 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
       onClick={() => {
         handleOnListClicked(elm.key);
       }}
-      className={isSelected(elm.key) ? 'itemSelected' : ''}
+      className={isSelected(elm.key) ? "itemSelected" : ""}
     >
       {elm.value}
     </div>
   ));
 
   return (
-    <div ref={newRef} style={{ display: 'inline-block' }}>
+    <div ref={newRef} style={{ display: "inline-block" }}>
       <Input
         placeholder={inputStringState(selectedItems)}
         value={filter || inputStringState(selectedItems)}
         disabled={disabled}
         onChange={handleOnKeyPressed} //тут надо фильтровать опции
-        style={{ width: '328px' }} //надо 328
+        style={{ width: "328px" }} //надо 328
         onClick={() => {
           Toggle(true); //всегда открывать?
         }}

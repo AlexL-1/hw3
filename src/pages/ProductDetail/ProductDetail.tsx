@@ -1,8 +1,13 @@
-import './ProductDetail.scss'; // импорт стилей
+import styles from "./ProductDetail.module.scss";
 
 // код компонента
 const ProductDetail = () => {
-  return <div className="ProductDetail">ProductDetail</div>;
+  return (
+    <>
+      <h1></h1>
+      <div className="ProductDetail">ProductDetail</div>;
+    </>
+  );
 };
 
 // Экспортируем компонент

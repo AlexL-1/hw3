@@ -1,7 +1,7 @@
 
-button{
+.button{
 height: 52px;
-background-color: var(--button-primary-bg);
+background-color: var(--bg-primary-color);
 border: none;
 color: white;
 font-size: 18px;
@@ -9,29 +9,29 @@ padding-left: 20px;
 padding-right: 20px;
 }
 
-button:focus {
+.button:focus {
   background-color: var(--button-primary-bg-active);
 }
 
-button:hover {
-  background-color: var(--button-primary-bg-hover);
+.button:hover {
+  background-color: var(--bg-primary-color-hover);
 }
 
-button.withloader:focus{
+.button.withloader:focus{
   background-color: var(--button-primary-bg);
 }
 
 
 
-button.withloader:hover{
+.button.withloader:hover{
   background-color: var(--button-primary-bg);
 
 }
 
-button:disabled, button.withloader:disabled {
+.button:disabled, button.withloader:disabled {
   background-color: var(--button-primary-bg-disabled);
 }
 
-button.fakeDisabled:disabled {
+.button.fakeDisabled:disabled {
   background-color: var(--button-primary-bg);
 }

@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+import styles from "./Loader.module.scss";
+
 export type LoaderProps = {
   /** Размер */
   size?: 's' | 'm' | 'l';
@@ -13,22 +16,7 @@ const Loader: React.FC<LoaderProps> = ({ size, className }: LoaderProps) => {
   return (
     <div className={className || 'loader-' + size}></div>
 
-    /*
-    <svg
-      className={className}
-      viewBox="-35 -35 70 70"
-      width={svgWidth}
-      height={svgWidth}
-      style={{ marginLeft: '10px' }}
-    >
-      <path
-        d="m30,0 a30,30 0 1 0 -30,30"
-        fill="none"
-        stroke-width="6"
-        stroke="black"
-        transform="rotate(-13)"
-      />
-    </svg>*/
+  
   );
 };
 

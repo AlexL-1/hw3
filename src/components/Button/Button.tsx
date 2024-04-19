@@ -1,5 +1,6 @@
-import React from 'react';
-import Loader from '../Loader';
+import React from "react";
+import Loader from "../Loader";
+import styles from "./Button.module.scss";
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   /** Состояние загрузки */
@@ -13,30 +14,25 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }: ButtonProps) => {
-  /*const styles = {
-    height: '52px',
-    backgroundColor: '#518581',
-    border: 'none',
-    color: 'white',
-    fontSize: '18px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-  };*/
+  let classNameString = styles.button;
+  let { className, disabled, ...otherProps } = props;
 
   if (loading) {
     //у такой кнопки не должно быть hover
 
-    let { className, disabled, ...otherProps } = props;
+    classNameString += " withloader";
 
-    if (className != '') className += ' withloader';
-    else className = 'withloader';
-
-    if (!disabled) className += ' fakeDisabled';
+    if (!disabled) classNameString += " fakeDisabled";
 
     return (
       //надо узнать, есть ли в props className  добавить туда наш
 
-      <button type="button" {...otherProps} className={className} disabled>
+      <button
+        type="button"
+        className={classNameString}
+        {...otherProps}
+        disabled
+      >
         <Loader size="s" className="loaderwhite" />
         {children}
       </button>
@@ -44,7 +40,12 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button type="button" {...props}>
+    <button
+      type="button"
+      className={classNameString}
+      {...otherProps}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
