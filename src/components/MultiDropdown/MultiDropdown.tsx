@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Input from "../Input";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 
-import styles from "./MultiDropdown.module.scss";
-
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
@@ -93,7 +91,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   let optionsFiltered: Option[] = [...options];
   optionsFiltered = options.filter(
-    ({ key, value }) => value.substring(0, filter.length) == filter
+    ({ value }) => value.substring(0, filter.length) == filter
   );
 
   const listItems = optionsFiltered.map((elm) => (

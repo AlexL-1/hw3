@@ -5,7 +5,7 @@ const ProductDetail = () => {
   return (
     <>
       <h1></h1>
-      <div className="ProductDetail">ProductDetail</div>;
+      <div className={styles.ProductDetail}>ProductDetail</div>;
     </>
   );
 };

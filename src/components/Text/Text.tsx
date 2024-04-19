@@ -45,7 +45,7 @@ const Text: React.FC<TextProps> = ({
   if (weight) newClassName += " " + weight;
 
   return (
-    <Mytag className={newClassName} style={styles}>
+    <Mytag className={newClassName} style={additionalStyles}>
       {children}
     </Mytag>
   );

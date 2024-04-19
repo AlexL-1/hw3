@@ -1,6 +1,4 @@
-
-/*loader*/
-.loader-l,.loader-m,.loader-s,.loaderwhite
+.loader
 {
   display: inline-block;
   border-style: solid;
@@ -9,27 +7,24 @@
   border-top-color: transparent;
   transform: rotate(125deg);
 
-}
+  &.l
+  {
+    width:40px;
+    height:40px;
+    border-width: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  &.m
+  {
+    width:32px;
+    height:32px;
+    border-width: 4px;
+    margin-top: 8px;
+    margin-left: 8px;
+  }
 
-.loader-l
-{
-  width:40px;
-  height:40px;
-  border-width: 5px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.loader-m
-{
-  width:32px;
-  height:32px;
-  border-width: 4px;
-  margin-top: 8px;
-  margin-left: 8px;
-}
-
-.loader-s
+  &.s
 {
   width:16px;
   height:16px;
@@ -38,13 +33,20 @@
   margin-left: 4px;
 }
 
-
-.loaderwhite /*loader in button*/
+&.white /*loader in button*/
 {
-  width:16px;
-  height:16px;
-  margin-top: 4px;
-  margin-right: 10px;
   border-color: white;
-  border-top-color: transparent;
 }
+
+
+}
+
+
+
+
+
+
+
+
+
+

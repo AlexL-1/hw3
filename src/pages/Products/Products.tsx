@@ -3,7 +3,7 @@ import styles from "./Products.module.scss"; // импорт стилей
 import MultiDropdown, { Option } from "components/MultiDropdown";
 import Input from "components/Input";
 import Text from "components/Text";
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import getAllProducts from "api/getAllProducts";
 import { Product } from "api/types";
 import Card from "components/Card";
@@ -52,7 +52,7 @@ const Products = () => {
       <div style={{ width: "1240px", margin: "auto" }}>
         <Input
           value={"Search product"}
-          onChange={function (value: string): void {
+          onChange={function (_value: string): void {
             throw new Error("Function not implemented.");
           }}
           style={{ width: "1079px", marginRight: "20px" }}
