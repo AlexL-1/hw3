@@ -1,61 +1,58 @@
-.textBasic{
+.textBasic {
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
 
-&.normal {  font-weight: 400; }
+.normal {
+  font-weight: 400;
+}
 
-&.medium {   font-weight: 500; }
+.medium {
+  font-weight: 500;
+}
 
-&.bold {   font-weight: 700; }
-
-&.accent {   color: #518581; }
-
-&.primary {  color: black;}
-&.secondary {  color: #AFADB5; }
-
-
-&.title
-{
+.bold {
   font-weight: 700;
-   font-size: 44px;
-    line-height: 48px;
 }
 
-&.button
-{
-   font-size: 18px;
+.accent {
+  color: var(--text-accent);
 }
 
-&.p-20
-{
+.primary {
+  color: var(--text-primary);
+}
+.secondary {
+  color: var(--text-secondary);
+}
+
+.title {
+  font-weight: var(--font-weight-bold);
+  font-size: 44px;
+  line-height: 48px;
+}
+
+.button {
+  font-size: 18px;
+}
+
+.p-20 {
   font-size: 20px;
   line-height: 24px;
 }
 
-&.p-18
-{
+.p-18 {
   font-size: 18px;
   line-height: 22px;
 }
 
-&.p-16
-{
+.p-16 {
   font-size: 16px;
   line-height: 20px;
 }
 
-&.p-14
-{
+.p-14 {
   font-size: 14px;
   line-height: 18px;
 }
-
-
-
-
-}
-
-
-
-

@@ -1,0 +1,15 @@
+.icon {
+  stroke: var(--text-primary);
+
+  &.primary {
+    stroke: var(--text-primary);
+  }
+
+  &.accent {
+    stroke: var(--text-accent);
+  }
+
+  &.secondary {
+    stroke: var(--text-secondary);
+  }
+}

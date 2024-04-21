@@ -20,9 +20,9 @@ const Button: React.FC<ButtonProps> = ({
   if (loading) {
     //у такой кнопки не должно быть hover
 
-    classNameString += " withloader";
+    classNameString = styles.withloader;
 
-    if (!disabled) classNameString += " fakeDisabled";
+    if (!disabled) classNameString = styles.fakeDisabled;
 
     return (
       //надо узнать, есть ли в props className  добавить туда наш

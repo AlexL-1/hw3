@@ -39,10 +39,10 @@ const Text: React.FC<TextProps> = ({
 
   let newClassName: string = styles.textBasic;
 
+  if (view) newClassName += " " + styles[view];
+  if (color) newClassName += " " + styles[color];
+  if (weight) newClassName += " " + styles[weight];
   if (className) newClassName += " " + className;
-  if (view) newClassName += " " + view;
-  if (color) newClassName += " " + color;
-  if (weight) newClassName += " " + weight;
 
   return (
     <Mytag className={newClassName} style={additionalStyles}>

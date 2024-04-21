@@ -1,12 +1,11 @@
-
-.button{
-height: 52px;
-background-color: var(--bg-primary-color);
-border: none;
-color: white;
-font-size: 18px;
-padding-left: 20px;
-padding-right: 20px;
+.button {
+  height: 52px;
+  background-color: var(--button-primary-bg);
+  border: none;
+  color: var(--button-primary-text);
+  font-size: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .button:focus {
@@ -14,24 +13,22 @@ padding-right: 20px;
 }
 
 .button:hover {
-  background-color: var(--bg-primary-color-hover);
+  background-color: var(--button-primary-bg-hover);
 }
 
-.button.withloader:focus{
+.withloader:focus {
   background-color: var(--button-primary-bg);
 }
 
-
-
-.button.withloader:hover{
+.withloader:hover {
   background-color: var(--button-primary-bg);
-
 }
 
-.button:disabled, button.withloader:disabled {
+.button:disabled,
+.withloader:disabled {
   background-color: var(--button-primary-bg-disabled);
 }
 
-.button.fakeDisabled:disabled {
+.fakeDisabled:disabled {
   background-color: var(--button-primary-bg);
 }

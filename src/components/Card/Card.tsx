@@ -1,5 +1,7 @@
-import React from 'react';
-import Text from '../Text';
+import React from "react";
+import Text from "../Text";
+
+import styles from "./Card.module.scss";
 
 export type CardProps = {
   /** Дополнительный classname */
@@ -21,16 +23,19 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
+  let classNameString: string = styles.card;
+  if (props.className) classNameString += " " + props.className;
+
   return (
-    <div onClick={props.onClick} className={props.className + ' card'}>
+    <div onClick={props.onClick} className={classNameString}>
       <img src={props.image} width="100%" />
-      <div className="card_white">
+      <div className={styles.card_white}>
         {props.captionSlot && (
-          <p className="text p-16 secondary bold" style={{ marginBottom: '7px' }}>
+          <Text tag="p" weight="bold" color="secondary" view="p-16">
             {props.captionSlot}
-          </p>
+          </Text>
         )}
-        <div style={{ marginBottom: '7px' }}>
+        <div style={{ marginBottom: "7px", marginTop: "7px" }}>
           <Text view="p-20" maxLines={2} weight="bold">
             {props.title}
           </Text>
@@ -40,24 +45,24 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         </Text>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '19px',
-            marginBottom: '14px',
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "19px",
+            marginBottom: "14px",
           }}
         >
           <div
             style={{
-              display: 'inline-block',
-              margin: 'auto',
-              marginLeft: '7px',
+              display: "inline-block",
+              margin: "auto",
+              marginLeft: "7px",
             }}
           >
-            <Text view="p-18" color="secondary">
+            <Text view="p-18" color="primary" weight="bold">
               {props.contentSlot}
             </Text>
           </div>
-          <div style={{ display: 'inline-block' }}>{props.actionSlot}</div>
+          <div style={{ display: "inline-block" }}>{props.actionSlot}</div>
         </div>
       </div>
     </div>

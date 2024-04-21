@@ -1,43 +1,39 @@
-.Navbar{
-
+.Navbar {
   display: flex;
   justify-content: space-between;
-  width:100%;
+  width: 100%;
   background-color: white;
   text-align: center;
-  
+  border-bottom: 2px solid #f3f3f3;
 }
 
-.Navbar .left{
-  display:inline-block;
-margin:auto;
-margin-left: 0px;
-margin-right: 0px;
+.Navbar .left {
+  display: inline-block;
+  margin: auto;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
-.Navbar .center{
-  display:inline-block;
-
+.Navbar .center {
+  display: inline-block;
 }
 
-.Navbar .right{
-  display:inline-block;
+.Navbar .right {
+  display: inline-block;
   padding-top: 30px;
 }
 
-
-
-.menuItem{
+.menuItem {
   text-decoration: none;
-  display:inline-block;
-  color:black;
+  display: inline-block;
+  color: black;
   line-height: 90px;
   padding-left: 40px;
   padding-right: 40px;
   border-bottom: transparent 2px solid;
   font-weight: 500;
 }
-.menuItem:hover{
-  color:#518581;
+.menuItem:hover {
+  color: #518581;
   border-bottom: #518581 2px solid;
 }

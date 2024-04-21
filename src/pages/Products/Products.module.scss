@@ -1,15 +1,60 @@
-.underHeader{
-
+.underHeader {
   display: block;
   text-align: center;
   width: 653px;
   margin: auto;
-  color: #AFADB5;
+  color: #afadb5;
 }
 
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
+.filter {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-.cards{
-  display: grid;
-  grid-template-columns: auto auto auto;
+.total {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.totalPhrase {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.totalNumber {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-accent);
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.pagination {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    width: 32px;
+    line-height: 48px;
+    text-align: center;
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: var(--button-primary-bg-hover);
+  }
+
+  a.currentPage {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+  }
 }
