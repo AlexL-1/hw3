@@ -1,10 +1,21 @@
-.underHeader {
+.page {
+  margin: auto;
   display: block;
-  text-align: center;
-  width: 653px;
-  margin: auto; //to center on page
-  color: #afadb5;
-  margin-bottom: 30px;
+  width: 1301px;
+  & > h1 {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 72px;
+  }
+  & > p {
+    display: block;
+    text-align: center;
+    width: 653px;
+    margin: auto; //to center on page
+    color: #afadb5;
+    margin-bottom: 30px;
+  }
 }
 
 .filterAndCards {

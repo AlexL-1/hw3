@@ -33,7 +33,7 @@ const Products = () => {
   const navigate = useNavigate();
 
   let offset: number = 0;
-  var page: number = 1;
+  let page: number = 1;
   const location = useLocation(); //надо отслеживать номера страниц
 
   const [productsArray, SetProductsArray] = useState<Product[]>([]);
@@ -62,17 +62,13 @@ const Products = () => {
   }, []); //запускаем при загрузке, а offset берем из строки
 
   return (
-    <div className={styles.Products}>
-      <div style={{ textAlign: "center" }}>
-        <Text tag="h1" view="title" className="header">
-          Products
-        </Text>
-      </div>
+    <div className={styles.page}>
+      <h1> Products</h1>
 
-      <div className={styles.underHeader}>
+      <p>
         We display products based on the latest products we have, if you want to
         see our old products please enter the name of the item
-      </div>
+      </p>
       <div className={styles.filterAndCards}>
         <Input
           placeholder="Search product"
@@ -112,7 +108,7 @@ const Products = () => {
               title={elm.title}
               subtitle={elm.description}
               contentSlot={elm.price + "$"}
-              onClick={() => navigate(`/product/${elm.id}`)}
+              onClick={() => navigate(`/product?id=${elm.id}`)}
             />
           ))}
         </div>

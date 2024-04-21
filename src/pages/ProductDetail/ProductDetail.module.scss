@@ -1,3 +1,80 @@
+.page {
+  margin: auto;
+  display: block;
+  width: 1301px;
+}
+
+.backButton {
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  line-height: 48px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.backButton * {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.cardInfo {
+  width: 100%;
+
+  & img {
+    width: 600px;
+    height: 600px;
+    display: inline-block;
+    margin-right: 40px;
+  }
+}
+
 .ProductDetail {
-  background-color: green;
+  display: inline-block;
+  width: 653px;
+  vertical-align: top;
+
+  h1 {
+    font-size: 44px;
+    line-height: 48px;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+}
+
+.description {
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--text-secondary);
+}
+
+.price {
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 700;
+  margin-top: 48px;
+}
+
+.actionButtons {
+  margin-top: 48px;
+  * {
+    margin-right: 48px;
+  }
+}
+
+.relatedItemsSection {
+  margin-top: 48px;
+
+  h2 {
+    font-size: 32px;
+    line-height: 48px;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+}
+
+.relatedItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

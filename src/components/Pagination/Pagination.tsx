@@ -2,6 +2,7 @@ import PrevIcon from "components/icons/PrevIcon";
 import NextIcon from "components/icons/NextIcon";
 import styles from "./Pagination.module.scss";
 import { ReactElement } from "react";
+import { Link } from "react-router-dom";
 
 type Pagination = {
   baseUrl: string; ///products?page=
@@ -28,42 +29,46 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
     for (let i = 2; i < totalPages - 1; i++) {
       if (currentPage == i) {
         pages.push(<a className={styles.currentPage}>{i}</a>);
-      } else pages.push(<a href={baseUrl + i}>{i}</a>);
+      } else pages.push(<Link to={baseUrl + i}>{i}</Link>);
     }
   } else {
     if (currentPage > 1 + 2 && currentPage < totalPages - 2) {
       //add group ...3,(4),5....
       pages.push(<>...</>);
-      pages.push(<a href={baseUrl + (currentPage - 1)}>{currentPage - 1}</a>);
+      pages.push(
+        <Link to={baseUrl + (currentPage - 1)}>{currentPage - 1}</Link>
+      );
       pages.push(<a className={styles.currentPage}>{currentPage}</a>);
-      pages.push(<a href={baseUrl + (currentPage + 1)}>{currentPage + 1}</a>);
+      pages.push(
+        <Link to={baseUrl + (currentPage + 1)}>{currentPage + 1}</Link>
+      );
       pages.push(<>...</>);
     } else if (currentPage == 1) {
-      pages.push(<a href={baseUrl + "2"}>2</a>);
-      pages.push(<a href={baseUrl + "3"}>3</a>);
+      pages.push(<Link to={baseUrl + "2"}>2</Link>);
+      pages.push(<Link to={baseUrl + "3"}>3</Link>);
       pages.push(<>...</>);
     } else if (currentPage == 2) {
       pages.push(<a className={styles.currentPage}>2</a>);
-      pages.push(<a href={baseUrl + "3"}>3</a>);
+      pages.push(<Link to={baseUrl + "3"}>3</Link>);
       pages.push(<>...</>);
     } else if (currentPage == 3) {
-      pages.push(<a href={baseUrl + "2"}>2</a>);
+      pages.push(<Link to={baseUrl + "2"}>2</Link>);
       pages.push(<a className={styles.currentPage}>3</a>);
-      pages.push(<a href={baseUrl + "4"}>4</a>);
+      pages.push(<Link to={baseUrl + "4"}>4</Link>);
       pages.push(<>...</>);
     } else if (currentPage == totalPages) {
       pages.push(<>...</>);
-      pages.push(<a href={baseUrl + (totalPages - 2)}>{totalPages - 2}</a>);
-      pages.push(<a href={baseUrl + (totalPages - 1)}>{totalPages - 1}</a>);
+      pages.push(<Link to={baseUrl + (totalPages - 2)}>{totalPages - 2}</Link>);
+      pages.push(<Link to={baseUrl + (totalPages - 1)}>{totalPages - 1}</Link>);
     } else if (currentPage == totalPages - 1) {
       pages.push(<>...</>);
-      pages.push(<a href={baseUrl + (totalPages - 2)}>{totalPages - 2}</a>);
+      pages.push(<Link to={baseUrl + (totalPages - 2)}>{totalPages - 2}</Link>);
       pages.push(<a className={styles.currentPage}>{totalPages - 1}</a>);
     } else if (currentPage == totalPages - 2) {
       pages.push(<>...</>);
-      pages.push(<a href={baseUrl + (totalPages - 3)}>{totalPages - 3}</a>);
+      pages.push(<Link to={baseUrl + (totalPages - 3)}>{totalPages - 3}</Link>);
       pages.push(<a className={styles.currentPage}>{totalPages - 2}</a>);
-      pages.push(<a href={baseUrl + (totalPages - 1)}>{totalPages - 1}</a>);
+      pages.push(<Link to={baseUrl + (totalPages - 1)}>{totalPages - 1}</Link>);
     }
   }
 
@@ -78,10 +83,10 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
         </>
       ) : (
         <>
-          <a href={baseUrl + (currentPage - 1)}>
+          <Link to={baseUrl + (currentPage - 1)}>
             <PrevIcon />
-          </a>
-          <a href={baseUrl + "1"}>1</a>
+          </Link>
+          <Link to={baseUrl + "1"}>1</Link>
         </>
       )}
 
@@ -96,10 +101,10 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
         </>
       ) : (
         <>
-          <a href={baseUrl + totalPages}>{totalPages}</a>
-          <a href={baseUrl + (currentPage + 1)}>
+          <Link to={baseUrl + totalPages}>{totalPages}</Link>
+          <Link to={baseUrl + (currentPage + 1)}>
             <NextIcon />
-          </a>
+          </Link>
         </>
       )}
     </div>
