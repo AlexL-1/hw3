@@ -3,7 +3,6 @@ import styles from "./Products.module.scss";
 import MultiDropdown, { Option } from "components/MultiDropdown";
 import Input from "components/Input";
 import Pagination from "components/Pagination";
-import Text from "components/Text";
 import { useEffect, useState } from "react";
 import getAllProducts from "api/getAllProducts";
 import { Product } from "api/types";
@@ -28,30 +27,43 @@ const Products = () => {
   //продуктов может быть много, нам надо только 3 показать
 
   const ELEMENTS_PER_PAGE: number = 6;
-  const PAGES_TOTAL: number = 10; //there are only 46 normal recors in the AP. others are custom created without proper image.
 
   const navigate = useNavigate();
 
-  let offset: number = 0;
-  let page: number = 1;
   const location = useLocation(); //надо отслеживать номера страниц
 
   const [productsArray, SetProductsArray] = useState<Product[]>([]);
-
-  const query = new URLSearchParams(location.search);
-  if (query.has("page")) {
-    page = Number(query.get("page"));
-    if (page < 1) page = 1; //normalize page value
-    if (page > PAGES_TOTAL) page = PAGES_TOTAL; //normalize page value
-    offset = ELEMENTS_PER_PAGE * (page - 1); //page1 == offset 0
-  }
+  const [productsCount, SetProductsCount] = useState(0);
+  const [page, SetPage] = useState(1);
 
   useEffect(() => {
+    const fetch = async () => {
+      const result = await getAllProducts({});
+      SetProductsCount(Math.ceil(result.length / ELEMENTS_PER_PAGE));
+    };
+    fetch();
+  }, []); //запускаем при загрузке
+
+  useEffect(() => {
+    let offset: number = 0;
+    let page_in_query: number = 1;
+    const query = new URLSearchParams(location.search);
+    if (query.has("page")) {
+      page_in_query = Number(query.get("page"));
+      if (page_in_query < 1) SetPage(1); //normalize page value
+      else if (productsCount > 0 && page_in_query > productsCount)
+        SetPage(productsCount);
+      else SetPage(page_in_query);
+      offset = ELEMENTS_PER_PAGE * (page_in_query - 1); //page1 == offset 0
+    }
+
+    console.log("effect location", page_in_query);
+
     const fetch = async () => {
       const result = await getAllProducts({
         limit: ELEMENTS_PER_PAGE,
         offset: offset,
-      });
+      }); // take everything and then slice it
 
       SetProductsArray(result); //теперь результаты надо положит в state
       //и после этого компонент перевысветится
@@ -59,7 +71,7 @@ const Products = () => {
       //на начальном можно было бы показать скелетоны
     };
     fetch();
-  }, []); //запускаем при загрузке, а offset берем из строки
+  }, [location]); //запускаем при изменении номера страницы
 
   return (
     <div className={styles.page}>
@@ -114,9 +126,9 @@ const Products = () => {
         </div>
       </div>
       <Pagination
-        baseUrl={"products?page="}
+        baseUrl={"/products?page="}
         currentPage={page}
-        totalPages={PAGES_TOTAL}
+        totalPages={productsCount}
       />
     </div>
   );
