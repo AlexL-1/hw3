@@ -1,0 +1,29 @@
+.pagination {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    width: 32px;
+    line-height: 48px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  a:hover {
+    background-color: var(--button-primary-bg-hover);
+    color: var(--text-primary);
+  }
+
+  a.disabled,
+  a.disabled:hover {
+    background-color: var(--button-primary-bg-disabled);
+  }
+
+  a.currentPage {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+  }
+  a * {
+    vertical-align: middle;
+  }
+}

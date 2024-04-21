@@ -2,8 +2,14 @@
   display: block;
   text-align: center;
   width: 653px;
-  margin: auto;
+  margin: auto; //to center on page
   color: #afadb5;
+  margin-bottom: 30px;
+}
+
+.filterAndCards {
+  width: 1240px;
+  margin: auto;
 }
 
 .cards {
@@ -12,9 +18,14 @@
   justify-content: space-between;
 }
 
-.filter {
+.filterContainer {
   margin-top: 10px;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.filter {
+  position: absolute;
 }
 
 .total {
@@ -37,24 +48,4 @@
   vertical-align: middle;
   display: inline-block;
   margin-bottom: 10px;
-}
-
-.pagination {
-  text-align: center;
-
-  a {
-    display: inline-block;
-    width: 32px;
-    line-height: 48px;
-    text-align: center;
-    text-decoration: none;
-  }
-  a:hover {
-    background-color: var(--button-primary-bg-hover);
-  }
-
-  a.currentPage {
-    background-color: var(--button-primary-bg);
-    color: var(--button-primary-text);
-  }
 }
