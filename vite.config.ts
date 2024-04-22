@@ -33,5 +33,5 @@ export default defineConfig({
   resolve: {
     alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
   },
-  base: "https://alexl-1.github.io/hw3/" //эта строчка мешает локально
+  base: "/hw3/" //эта строчка мешает локально
 })
