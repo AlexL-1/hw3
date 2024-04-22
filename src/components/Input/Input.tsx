@@ -17,7 +17,6 @@ export type InputProps = Omit<
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, afterSlot, className, ...props }: InputProps, ref) => {
     let classNameString: string = styles.input;
-    classNameString += " " + styles.input;
     if (afterSlot) classNameString += " " + styles.inputLoading;
 
     return (

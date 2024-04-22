@@ -1,6 +1,6 @@
 import Button from "components/Button";
 import styles from "./Products.module.scss";
-import MultiDropdown, { Option } from "components/MultiDropdown";
+import Dropdown, { Option } from "components/Dropdown";
 import Input from "components/Input";
 import Pagination from "components/Pagination";
 import { useEffect, useState } from "react";
@@ -92,14 +92,11 @@ const Products = () => {
 
         <div className={styles.filterContainer}>
           <div className={styles.filter}>
-            <MultiDropdown
+            <Dropdown
               options={categories}
-              value={[]}
-              onChange={function (_value: Option[]): void {
-                throw new Error("Function not implemented.");
-              }}
-              getTitle={function (_value: Option[]): string {
-                return "Filter";
+              keySelected=""
+              onChange={(val) => {
+                console.log(val);
               }}
             />
           </div>
