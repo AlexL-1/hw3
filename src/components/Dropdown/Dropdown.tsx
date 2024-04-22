@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Input from "../Input";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import styles from "./Dropdown.module.scss";
 
@@ -15,15 +14,12 @@ export type DropdownProps = {
   keySelected: string;
   /** Callback, вызываемый при выборе варианта */
   onChange: (key: string) => void;
-  /** Заблокирован ли дропдаун */
-  disabled?: boolean;
 };
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   keySelected,
   onChange,
-  disabled,
 }: DropdownProps) => {
   let [isExpanded, Toggle] = useState(false);
   let [index, SetIndex] = useState(keySelected);

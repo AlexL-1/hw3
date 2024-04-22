@@ -1,7 +1,7 @@
 import getProduct from "api/getProduct";
 import getAllProducts from "api/getAllProducts";
 import { Product } from "api/types";
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "components/Button";
 import PrevIcon from "components/icons/PrevIcon";
 import Card from "components/Card";
