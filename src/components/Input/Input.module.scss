@@ -1,34 +1,42 @@
+@import "/src/styles/variables/global.scss";
 
-.input, .input+div{
-  background-color: white;
-  width:300px;
-  height:52px;
-  border:1px solid white;
-    font-size: 16px;
-    outline: none;
+.input,
+.input + div {
+  background-color: $input-bg;
+  width: 300px;
+  height: 52px;
+  border: 1px solid $input-border;
+  font-size: 16px;
+  outline: none;
   padding-left: 10px;
-
 }
 
-
-.input:focus, .input:focus+div{
-  border:1px solid var(--input-border-focus);
+.input::placeholder {
+  color: $input-placeholder;
 }
 
-.inputLoading{
+.input:focus,
+.input:focus + div {
+  border: 1px solid $input-border-focus;
+  background-color: $input-bg-focus;
+}
+
+.input:disabled {
+  background-color: $input-bg-disabled;
+}
+
+.inputLoading {
   border-right-width: 0px;
 }
 
-.inputLoading+div{
+.inputLoading + div {
   border-left-width: 0px;
   display: inline-block;
-  width:auto;
+  width: auto;
   vertical-align: top;
 }
 
-.inputLoading+div+div{
-  margin-top: "16px";
-   margin-right: "5px"
+.inputLoading + div + div {
+  margin-top: 16px;
+  margin-right: 5px;
 }
-
-

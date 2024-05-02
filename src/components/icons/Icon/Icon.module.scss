@@ -1,15 +1,17 @@
+@import "/src/styles/variables/global.scss";
+
 .icon {
-  stroke: var(--text-primary);
+  stroke: $text-primary;
 
-  &.primary {
-    stroke: var(--text-primary);
+  .primary {
+    stroke: $text-primary;
   }
 
-  &.accent {
-    stroke: var(--text-accent);
+  .accent {
+    stroke: $text-accent;
   }
 
-  &.secondary {
-    stroke: var(--text-secondary);
+  .secondary {
+    stroke: $text-secondary;
   }
 }

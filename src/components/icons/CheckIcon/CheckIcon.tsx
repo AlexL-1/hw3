@@ -3,7 +3,7 @@ import { IconProps } from "../Icon";
 import styles from "../Icon/Icon.module.scss";
 
 const CheckIcon: React.FC<IconProps> = ({ className, color }: IconProps) => {
-  let newClassName: string = styles.icon + " " + color + " " + className;
+  const newClassName: string = styles.icon + " " + color + " " + className;
 
   return (
     <svg viewBox="0 0 24 24" width="24" height="24" className={newClassName}>

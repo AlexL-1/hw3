@@ -9,12 +9,10 @@ import { Product } from "api/types";
 import Card from "components/Card";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// код компонента
-
 //запрос всех продуктов возвращает такой массив
 //[{"id":10,"title":"Product 1 Updated","price":1000,"description":"Description 1 Updated","images":["[\"https://i.imgur.com/wXuQ7bm.jpeg\"","\"https://i.imgur.com/BZrIEmb.jpeg\"","\"https://i.imgur.com/KcT6BE0.jpeg\"]"],"creationAt":"2024-04-18T20:15:40.000Z","updatedAt":"2024-04-19T16:39:49.000Z","category":{"id":1,"name":"Clothes","image":"https://i.imgur.com/QkIa5tT.jpeg","creationAt":"2024-04-18T20:15:40.000Z","updatedAt":"2024-04-18T20:15:40.000Z"}},....]
 
-//hard-coded categories. API allows to create custom goods, so the categories is enormous
+//hard-coded categories. API allows to create custom goods, so the categories list is enormous
 const categories: Option[] = [
   { key: "1", value: "Clothes" },
   { key: "2", value: "Electronics" },
@@ -24,22 +22,21 @@ const categories: Option[] = [
 ];
 
 const Products = () => {
-  //продуктов может быть много, нам надо только 3 показать
-
-  const ELEMENTS_PER_PAGE: number = 6;
+  const ELEMENTS_PER_PAGE: number = 6; //продуктов может быть много, нам надо только 6 показать
 
   const navigate = useNavigate();
 
   const location = useLocation(); //надо отслеживать номера страниц
 
-  const [productsArray, SetProductsArray] = useState<Product[]>([]);
-  const [productsCount, SetProductsCount] = useState(0);
-  const [page, SetPage] = useState(1);
+  const [productsArray, setProductsArray] = useState<Product[]>([]);
+  const [productsCount, setProductsCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetch = async () => {
       const result = await getAllProducts({});
-      SetProductsCount(Math.ceil(result.length / ELEMENTS_PER_PAGE));
+      if (!result.isError)
+        setProductsCount(Math.ceil(result.data.length / ELEMENTS_PER_PAGE));
     };
     fetch();
   }, []); //запускаем при загрузке
@@ -50,22 +47,22 @@ const Products = () => {
     const query = new URLSearchParams(location.search);
     if (query.has("page")) {
       page_in_query = Number(query.get("page"));
-      if (page_in_query < 1) SetPage(1); //normalize page value
+      if (page_in_query < 1)
+        setPage(1); //normalize page value
       else if (productsCount > 0 && page_in_query > productsCount)
-        SetPage(productsCount);
-      else SetPage(page_in_query);
+        setPage(productsCount);
+      else setPage(page_in_query);
       offset = ELEMENTS_PER_PAGE * (page_in_query - 1); //page1 == offset 0
     }
-
-    console.log("effect location", page_in_query);
 
     const fetch = async () => {
       const result = await getAllProducts({
         limit: ELEMENTS_PER_PAGE,
         offset: offset,
-      }); // take everything and then slice it
+      });
 
-      SetProductsArray(result); //теперь результаты надо положит в state
+      if (!result.isError) setProductsArray(result.data);
+      //теперь результаты надо положит в state
       //и после этого компонент перевысветится
       //то есть будет 2 рендера: начальный пустой и потом с данными
       //на начальном можно было бы показать скелетоны
@@ -75,7 +72,7 @@ const Products = () => {
 
   return (
     <div className={styles.page}>
-      <h1> Products</h1>
+      <h1>Products</h1>
 
       <p>
         We display products based on the latest products we have, if you want to
@@ -83,10 +80,10 @@ const Products = () => {
       </p>
       <div className={styles.filterAndCards}>
         <Input
+          style={{ width: "1079px", marginRight: "20px" }}
           placeholder="Search product"
           value=""
           onChange={() => {}}
-          style={{ width: "1079px", marginRight: "20px" }}
         />
         <Button>Find now</Button>
 
@@ -117,7 +114,7 @@ const Products = () => {
               title={elm.title}
               subtitle={elm.description}
               contentSlot={elm.price + "$"}
-              onClick={() => navigate(`/product?id=${elm.id}`)}
+              onClick={() => navigate(`/product/${elm.id}`)}
             />
           ))}
         </div>

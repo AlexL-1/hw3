@@ -1,12 +1,15 @@
 import { API_ENDPOINTS } from "../config/api";
 import { Product } from "./types";
-import { makeGetRequest } from "../utils/axios_get";
+import { makeGetRequest, BaseResponse } from "../utils/axios_get";
 
 //https://api.escuelajs.co/api/v1/products/4
 //надо приклетить id к url
-const getProduct = async (id: number ) => {
-  const data = await makeGetRequest<Product>({url:API_ENDPOINTS.PRODUCTS + "/" + id.toString()});
-  return data;
+const getProduct = async (id: number): Promise<BaseResponse<Product>> => {
+  const response = await makeGetRequest<Product>({
+    url: `${API_ENDPOINTS.PRODUCTS}/${id}`,
+  });
+  if (response.isError) return { isError: true };
+  else return { data: response.data, isError: false };
 };
 
-export default getProduct
+export default getProduct;

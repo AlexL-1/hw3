@@ -1,8 +1,10 @@
+@import "/src/styles/variables/global.scss";
+
 .droplistInput {
-  background-color: white;
+  background-color: $dropdown-options-bg;
   width: 300px;
   height: 52px;
-  border: 1px solid white;
+  border: 1px solid $dropdown-options-bg;
   font-size: 16px;
   outline: none;
   padding-left: 10px;
@@ -10,7 +12,7 @@
 }
 
 .inputIcon {
-  background-color: white;
+  background-color: $dropdown-options-bg;
   border-left-width: 0px;
   display: inline-block;
   vertical-align: top;
@@ -22,11 +24,11 @@
 }
 
 .droplist {
+  @include shadow();
   border: none;
   margin-top: 9px;
   display: block;
-  background-color: white;
-  box-shadow: var(--shadow);
+  background-color: $dropdown-options-bg;
   height: auto;
   width: 367px;
 }
@@ -41,5 +43,5 @@
   color: #afadb5;
 }
 .droplist div.itemSelected {
-  color: #518581;
+  color: $brand;
 }

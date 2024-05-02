@@ -27,7 +27,7 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
   if (totalPages < TOTAL_PAGES_SHOW_ALL_BOUDARY && totalPages > 2) {
     //first and last pages are already added
     for (let i = 2; i < totalPages - 1; i++) {
-      if (currentPage == i) {
+      if (currentPage === i) {
         pages.push(<a className={styles.currentPage}>{i}</a>);
       } else pages.push(<Link to={baseUrl + i}>{i}</Link>);
     }
@@ -43,28 +43,28 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
         <Link to={baseUrl + (currentPage + 1)}>{currentPage + 1}</Link>
       );
       pages.push(<>...</>);
-    } else if (currentPage == 1) {
+    } else if (currentPage === 1) {
       pages.push(<Link to={baseUrl + "2"}>2</Link>);
       pages.push(<Link to={baseUrl + "3"}>3</Link>);
       pages.push(<>...</>);
-    } else if (currentPage == 2) {
+    } else if (currentPage === 2) {
       pages.push(<a className={styles.currentPage}>2</a>);
       pages.push(<Link to={baseUrl + "3"}>3</Link>);
       pages.push(<>...</>);
-    } else if (currentPage == 3) {
+    } else if (currentPage === 3) {
       pages.push(<Link to={baseUrl + "2"}>2</Link>);
       pages.push(<a className={styles.currentPage}>3</a>);
       pages.push(<Link to={baseUrl + "4"}>4</Link>);
       pages.push(<>...</>);
-    } else if (currentPage == totalPages) {
+    } else if (currentPage === totalPages) {
       pages.push(<>...</>);
       pages.push(<Link to={baseUrl + (totalPages - 2)}>{totalPages - 2}</Link>);
       pages.push(<Link to={baseUrl + (totalPages - 1)}>{totalPages - 1}</Link>);
-    } else if (currentPage == totalPages - 1) {
+    } else if (currentPage === totalPages - 1) {
       pages.push(<>...</>);
       pages.push(<Link to={baseUrl + (totalPages - 2)}>{totalPages - 2}</Link>);
       pages.push(<a className={styles.currentPage}>{totalPages - 1}</a>);
-    } else if (currentPage == totalPages - 2) {
+    } else if (currentPage === totalPages - 2) {
       pages.push(<>...</>);
       pages.push(<Link to={baseUrl + (totalPages - 3)}>{totalPages - 3}</Link>);
       pages.push(<a className={styles.currentPage}>{totalPages - 2}</a>);
@@ -74,7 +74,7 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
 
   return (
     <div className={styles.pagination}>
-      {currentPage == 1 ? (
+      {currentPage === 1 ? (
         <>
           <a className={styles.disabled}>
             <PrevIcon />
@@ -92,7 +92,7 @@ const Pagination = ({ baseUrl, currentPage, totalPages }: Pagination) => {
 
       {...pages}
 
-      {currentPage == totalPages ? (
+      {currentPage === totalPages ? (
         <>
           <a className={styles.currentPage}>{totalPages}</a>
           <a className={styles.disabled}>

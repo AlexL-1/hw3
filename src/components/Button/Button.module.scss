@@ -1,34 +1,36 @@
+@import "/src/styles/variables/global.scss";
+
 .button {
   height: 52px;
-  background-color: var(--button-primary-bg);
+  background-color: $button-primary-bg;
   border: none;
-  color: var(--button-primary-text);
+  color: $button-primary-text;
   font-size: 18px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
 .button:focus {
-  background-color: var(--button-primary-bg-active);
+  background-color: $button-primary-bg-active;
 }
 
 .button:hover {
-  background-color: var(--button-primary-bg-hover);
+  background-color: $button-primary-bg-hover;
 }
 
 .withloader:focus {
-  background-color: var(--button-primary-bg);
+  background-color: $button-primary-bg;
 }
 
 .withloader:hover {
-  background-color: var(--button-primary-bg);
+  background-color: $button-primary-bg;
 }
 
 .button:disabled,
 .withloader:disabled {
-  background-color: var(--button-primary-bg-disabled);
+  background-color: $button-primary-bg-disabled;
 }
 
 .fakeDisabled:disabled {
-  background-color: var(--button-primary-bg);
+  background-color: $button-primary-bg;
 }

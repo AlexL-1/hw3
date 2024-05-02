@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }: ButtonProps) => {
   let classNameString = styles.button;
-  let { className, disabled, ...otherProps } = props;
+  const { className, disabled, ...otherProps } = props;
 
   if (loading) {
     //у такой кнопки не должно быть hover

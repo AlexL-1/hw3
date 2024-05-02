@@ -1,37 +1,38 @@
-:root {
-  --font-family-main: "Roboto", Arial, Helvetica, sans-serif;
+$font-family-main: "Roboto", Arial, Helvetica, sans-serif;
 
-  //brand colors
-  --brand: #518581;
-  --brand-hover: #86aaa7;
-  --brand-active: #487773;
-
-  //text colors
-  --text-primary: black;
-  --text-secondary: #afadb5;
-  --text-accent: var(--brand);
-
-  //button colors
-  --button-primary-bg: var(--brand);
-  --button-primary-bg-hover: var(--brand-hover);
-  --button-primary-bg-disabled: #d9d9d9;
-  --button-primary-text: #ffffff;
-  --button-primary-bg-active: var(--brand-active);
-
-  //input
-  --input-bg-disabled: #ffffff;
-  --input-bg-focus: #ffffff;
-  --input-border: #ffffff;
-  --input-border-focus: var(--brand);
-  --input-placeholder: #afadb5;
-
-  //card
-  --card-bg: #ffffff;
-  --card-image-bg: #d9d9d9;
-
-  //dropdown
-  --dropdown-options-bg: #ffffff;
-
-  //shadow for dropdown and card
-  --shadow: 0px 4px 10px 0px #00000040;
+@mixin shadow() {
+  box-shadow: 0px 4px 10px 0px #00000040;
 }
+
+//brand colors
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-active: #487773;
+$background: #ffffff;
+
+//text colors
+$text-primary: black;
+$text-secondary: #afadb5;
+$text-accent: $brand;
+
+//button colors
+$button-primary-bg: $brand;
+$button-primary-bg-hover: $brand-hover;
+$button-primary-bg-disabled: #d9d9d9;
+$button-primary-text: #ffffff;
+$button-primary-bg-active: $brand-active;
+
+//input
+$input-bg: $background;
+$input-bg-disabled: $background;
+$input-bg-focus: $background;
+$input-border: $background;
+$input-border-focus: $brand;
+$input-placeholder: $text-secondary;
+
+//card
+$card-bg: $background;
+$card-image-bg: #d9d9d9;
+
+//dropdown
+$dropdown-options-bg: $background;

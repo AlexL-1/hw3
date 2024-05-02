@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-
     "baseUrl": "src",
     "paths": {
       "components": ["components/*"],
@@ -15,8 +14,6 @@
       "utils": ["utils/*"],
       "api": ["api/*"]
     },
-
-
 
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

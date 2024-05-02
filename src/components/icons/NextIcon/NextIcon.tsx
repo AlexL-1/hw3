@@ -3,7 +3,7 @@ import { IconProps } from "../Icon";
 import styles from "../Icon/Icon.module.scss";
 
 const NextIcon: React.FC<IconProps> = ({ className, color }: IconProps) => {
-  let newClassName: string = styles.icon + " " + color + " " + className;
+  const newClassName: string = styles.icon + " " + color + " " + className;
 
   return (
     <svg

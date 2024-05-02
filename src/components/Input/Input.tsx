@@ -1,5 +1,5 @@
 import React from "react";
-
+import classNames from "classnames";
 import styles from "./Input.module.scss";
 
 export type InputProps = Omit<
@@ -16,8 +16,11 @@ export type InputProps = Omit<
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, afterSlot, className, ...props }: InputProps, ref) => {
-    let classNameString: string = styles.input;
-    if (afterSlot) classNameString += " " + styles.inputLoading;
+    let classNameString: string = classNames(
+      styles.input,
+      afterSlot ? styles.inputLoading : "",
+      className
+    );
 
     return (
       <>

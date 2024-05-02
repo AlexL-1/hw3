@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import lalasiaLogo from "../../assets/lalasia_logo.svg";
 import backetLogo from "../../assets/basket_logo.svg";
 import loginLogo from "../../assets/login_logo.svg";
@@ -20,15 +20,15 @@ const Navbar = () => {
   return (
     <div className={styles.Navbar}>
       <div className={styles.left}>
-        <Link to="/">
+        <NavLink to="/">
           <img src={lalasiaLogo} />
-        </Link>
+        </NavLink>
       </div>
       <nav className={styles.center}>
         {menuElements.map((elm) => (
-          <Link to={elm.url} key={elm.name} className={styles.menuItem}>
+          <NavLink to={elm.url} key={elm.name} className={styles.menuItem}>
             {elm.name}
-          </Link>
+          </NavLink>
         ))}
       </nav>
       <div className={styles.right}>

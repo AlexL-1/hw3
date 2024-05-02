@@ -6,7 +6,7 @@ const ArrowDownIcon: React.FC<IconProps> = ({
   className,
   color,
 }: IconProps) => {
-  let newClassName: string = styles.icon + " " + color + " " + className;
+  const newClassName: string = styles.icon + " " + color + " " + className;
 
   return (
     <svg

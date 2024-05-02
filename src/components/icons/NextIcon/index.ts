@@ -1,1 +1,1 @@
-export { default } from './NextIcon';
+export { default } from "./NextIcon";

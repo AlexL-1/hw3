@@ -1,3 +1,5 @@
+@import "/src/styles/variables/global.scss";
+
 .pagination {
   text-align: center;
 
@@ -7,21 +9,21 @@
     line-height: 48px;
     text-align: center;
     text-decoration: none;
-    color: var(--text-primary);
+    color: $text-primary;
   }
   a:hover {
-    background-color: var(--button-primary-bg-hover);
-    color: var(--text-primary);
+    background-color: $button-primary-bg-hover;
+    color: $text-primary;
   }
 
   a.disabled,
   a.disabled:hover {
-    background-color: var(--button-primary-bg-disabled);
+    background-color: $button-primary-bg-disabled;
   }
 
   a.currentPage {
-    background-color: var(--button-primary-bg);
-    color: var(--button-primary-text);
+    background-color: $button-primary-bg;
+    color: $button-primary-text;
   }
   a * {
     vertical-align: middle;

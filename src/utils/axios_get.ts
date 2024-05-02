@@ -1,30 +1,38 @@
-//helper function that makes a GET request to api
-//надо импортировать axios
 import axios from "axios";
 
-//это пример с https://www.npmjs.com/package/axios#example
-
-//Record = { key(string):value(string|number), key1:value1, .... } 
-
-
-type RequestParams = { //эти параметры нужны для отправки запроса
-    url:string,
-    params?:Record<string,string|number>
-}
-
-
-
-// T неизвестный пока тип. Мы будем давать тип ожидаемого ответа при обращении  к функции
-export const makeGetRequest = async<T> ({url,params }:RequestParams) => {
-    try {
-      const response = await axios.get(url, {
-        params: params
-      });
-        return response.data as T;
-      //console.log(response);
-    } catch (error:any) {
-        throw new Error(error)
-      //console.error(error);
+export type BaseResponse<T> =
+  | {
+      data: T;
+      isError: false;
     }
-  }
+  | {
+      isError: true;
+    };
 
+type RequestParams = {
+  url: string;
+  params?: Record<string, string | number>;
+};
+
+export const makeGetRequest = async <T>({
+  url,
+  params,
+}: RequestParams): Promise<BaseResponse<T>> => {
+  try {
+    const response = await axios.get(url, {
+      params: params,
+    });
+
+    if (response.status === 200) {
+      return {
+        data: response.data,
+        isError: false,
+      };
+    }
+    return {
+      isError: true,
+    };
+  } catch {
+    return { isError: true };
+  }
+};

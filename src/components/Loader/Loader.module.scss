@@ -1,52 +1,34 @@
-.loader
-{
+@import "/src/styles/variables/global.scss";
+
+@mixin loaderSize($size, $borderWidth, $margin) {
+  width: $size;
+  height: $size;
+  border-width: $borderWidth;
+  margin-top: $margin;
+  margin-left: $margin;
+}
+
+.loader {
   display: inline-block;
   border-style: solid;
-  border-color: #518581;
+  border-color: $brand;
   border-radius: 50%;
   border-top-color: transparent;
   transform: rotate(125deg);
 
-  &.l
-  {
-    width:40px;
-    height:40px;
-    border-width: 5px;
-    margin-top: 10px;
-    margin-left: 10px;
+  &_l {
+    @include loaderSize($size: 40px, $borderWidth: 5px, $margin: 10px);
   }
-  &.m
-  {
-    width:32px;
-    height:32px;
-    border-width: 4px;
-    margin-top: 8px;
-    margin-left: 8px;
+  &_m {
+    @include loaderSize($size: 32px, $borderWidth: 4px, $margin: 8px);
   }
 
-  &.s
-{
-  width:16px;
-  height:16px;
-  border-width: 2px;
-  margin-top: 4px;
-  margin-left: 4px;
+  &_s {
+    @include loaderSize($size: 16px, $borderWidth: 2px, $margin: 4px);
+  }
+
+  &_white /*loader in button*/ {
+    @include loaderSize($size: 16px, $borderWidth: 2px, $margin: 4px);
+    border-color: white;
+  }
 }
-
-&.white /*loader in button*/
-{
-  border-color: white;
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-

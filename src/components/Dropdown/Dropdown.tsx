@@ -8,11 +8,8 @@ export type Option = {
 };
 
 export type DropdownProps = {
-  /** Массив возможных вариантов для выбора */
   options: Option[];
-  /** Текущий индекс, может быть пустым */
   keySelected: string;
-  /** Callback, вызываемый при выборе варианта */
   onChange: (key: string) => void;
 };
 
@@ -21,8 +18,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   keySelected,
   onChange,
 }: DropdownProps) => {
-  let [isExpanded, Toggle] = useState(false);
-  let [index, SetIndex] = useState(keySelected);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [index, setIndex] = useState<string>(keySelected);
 
   const newRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -33,24 +30,29 @@ const Dropdown: React.FC<DropdownProps> = ({
   });
   const handleOutsideClick = (e: any) => {
     if (newRef.current && !newRef.current.contains(e.target)) {
-      Toggle(false);
+      setIsExpanded(false);
     }
   };
 
-  const handleOnListClicked = (key: string) => {
-    {
-      Toggle(false);
-      //only 1 category
-      // if selected, then unselect
-      if (key == index) {
-        onChange(key); //callback
-        SetIndex("");
-      } else {
-        onChange(key); //callback
-        SetIndex(key);
+  const handleOnListClicked = React.useCallback(
+    (key: string) => {
+      {
+        //может быть выбрана только одна категория
+        //чтобы сбросить категорию, надо выбрать пустое значение
+        //поэтому по щелчку список сразу сворачиваем
+
+        setIsExpanded(false);
+
+        if (key === index) {
+          //если щелкнули ту же самую категорию, то делать ничего не надо
+        } else {
+          onChange(key); //callback - запустить фильтрафию в родителе
+          setIndex(key);
+        }
       }
-    }
-  };
+    },
+    [index]
+  );
 
   const listItems = options.map((elm) => (
     <div
@@ -58,13 +60,13 @@ const Dropdown: React.FC<DropdownProps> = ({
       onClick={() => {
         handleOnListClicked(elm.key);
       }}
-      className={elm.key == index ? styles.itemSelected : ""}
+      className={elm.key === index ? styles.itemSelected : ""}
     >
       {elm.value}
     </div>
   ));
 
-  const optionsFiltered = options.filter((elm) => elm.key == index);
+  const optionsFiltered = options.filter((elm) => elm.key === index);
 
   return (
     <div ref={newRef}>
@@ -73,7 +75,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         value={optionsFiltered.length > 0 ? optionsFiltered[0].value : ""}
         onChange={() => {}} //do nothing
         onClick={() => {
-          Toggle(true); //open
+          setIsExpanded(true); //open
         }}
         className={styles.droplistInput}
         readOnly

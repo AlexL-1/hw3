@@ -1,21 +1,45 @@
+@import "/src/styles/variables/global.scss";
+
 .card {
   display: block;
-  background-color: var(--card-bg);
+  background-color: $card-bg;
   width: 349px;
   margin-bottom: 30px;
   transition: transform 0.2s; /* Animation */
 }
+
 .card:hover {
-  box-shadow: var(--shadow);
+  @include shadow();
   transform: scale(1.02);
 }
 
 .card img {
-  background-color: var(--card-image-bg);
+  background-color: $card-image-bg;
+}
+
+.actionSlot {
+  display: inline-block;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 19px;
+  margin-bottom: 14px;
+}
+
+.bottom {
+  display: inline-block;
+  margin: auto;
+  margin-left: 7px;
+}
+
+.title {
+  margin-bottom: 7px;
+  margin-top: 7px;
 }
 
 .card_white {
-  width: 100%;
   padding: 10px;
   padding-top: 20px;
 }
