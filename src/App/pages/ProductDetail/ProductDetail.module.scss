@@ -1,3 +1,5 @@
+@import "/src/styles/variables/global.scss";
+
 .page {
   margin: auto;
   display: block;
@@ -7,7 +9,7 @@
 .backButton {
   display: block;
   text-decoration: none;
-  color: var(--text-primary);
+  color: $text-primary;
   line-height: 48px;
   margin-top: 40px;
   margin-bottom: 20px;
@@ -20,13 +22,13 @@
 
 .cardInfo {
   width: 100%;
+}
 
-  & img {
-    width: 600px;
-    height: 600px;
-    display: inline-block;
-    margin-right: 40px;
-  }
+.cardImg {
+  width: 600px;
+  height: 600px;
+  display: inline-block;
+  margin-right: 40px;
 }
 
 .ProductDetail {
@@ -45,7 +47,7 @@
 .description {
   font-size: 20px;
   line-height: 24px;
-  color: var(--text-secondary);
+  color: $text-secondary;
 }
 
 .price {

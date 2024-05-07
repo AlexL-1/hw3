@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import ArrowDownIcon from "../icons/ArrowDownIcon";
+import ArrowDownIcon from "../../../../components/icons/ArrowDownIcon";
 import styles from "./Dropdown.module.scss";
 
 export type Option = {
@@ -20,6 +20,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 }: DropdownProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [index, setIndex] = useState<string>(keySelected);
+  //useState с начальным значением срабатывает только при первом рендере
+  //нужен useEffect, чтобы следить на изменением keySelected
+  // https://stackoverflow.com/questions/58818727/react-usestate-not-setting-initial-value
+  useEffect(() => {
+    setIndex(keySelected);
+  }, [keySelected]);
 
   const newRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -75,15 +81,19 @@ const Dropdown: React.FC<DropdownProps> = ({
         value={optionsFiltered.length > 0 ? optionsFiltered[0].value : ""}
         onChange={() => {}} //do nothing
         onClick={() => {
-          setIsExpanded(true); //open
+          setIsExpanded((prev) => !prev); //toggle состояния
         }}
         className={styles.droplistInput}
         readOnly
       />
-      <span className={styles.inputIcon}>
+      <span
+        className={styles.inputIcon}
+        onClick={() => {
+          setIsExpanded((prev) => !prev); //toggle состояния
+        }}
+      >
         <ArrowDownIcon />
       </span>
-
       {isExpanded && <span className={styles.droplist}>{listItems}</span>}
     </div>
   );

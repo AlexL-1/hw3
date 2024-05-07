@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  img {
+    width: fit-content;
+  }
+}
+
+.buttonPrev,
+.buttonNext {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  top: calc(300px - 64px / 2);
+  display: block;
+}
+
+.buttonPrev {
+  left: 20px;
+}
+
+.buttonNext {
+  right: 20px;
+}

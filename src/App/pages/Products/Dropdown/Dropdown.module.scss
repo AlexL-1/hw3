@@ -31,12 +31,17 @@
   background-color: $dropdown-options-bg;
   height: auto;
   width: 367px;
+  z-index: 4;
 }
 
 .droplist div {
   padding: 14px;
   color: black;
   padding-bottom: 15px;
+}
+/* это пустой элемент, чтобы выдрать его и сбросить фильтр*/
+.droplist div:first-child {
+  background-color: #d9d9d9;
 }
 
 .droplist div:hover {

@@ -1,19 +1,19 @@
 import Button from "components/Button";
 import styles from "./Products.module.scss";
-import Dropdown, { Option } from "components/Dropdown";
+import Dropdown, { Option } from "./Dropdown";
 import Input from "components/Input";
-import Pagination from "components/Pagination";
-import { useEffect, useState } from "react";
-import getAllProducts from "api/getAllProducts";
-import { Product } from "api/types";
+import Pagination from "./Pagination";
+import { useEffect } from "react";
 import Card from "components/Card";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import rootStore from "store/RootStore";
 
-//запрос всех продуктов возвращает такой массив
-//[{"id":10,"title":"Product 1 Updated","price":1000,"description":"Description 1 Updated","images":["[\"https://i.imgur.com/wXuQ7bm.jpeg\"","\"https://i.imgur.com/BZrIEmb.jpeg\"","\"https://i.imgur.com/KcT6BE0.jpeg\"]"],"creationAt":"2024-04-18T20:15:40.000Z","updatedAt":"2024-04-19T16:39:49.000Z","category":{"id":1,"name":"Clothes","image":"https://i.imgur.com/QkIa5tT.jpeg","creationAt":"2024-04-18T20:15:40.000Z","updatedAt":"2024-04-18T20:15:40.000Z"}},....]
-
-//hard-coded categories. API allows to create custom goods, so the categories list is enormous
+//в API люди свои товары и категории добавляют,
+//и получается каша из категорий
+//поэтома hard-code массив категорий
 const categories: Option[] = [
+  { key: "", value: "" }, //пустой, чтобы выключать категории
   { key: "1", value: "Clothes" },
   { key: "2", value: "Electronics" },
   { key: "3", value: "Furniture" },
@@ -21,54 +21,25 @@ const categories: Option[] = [
   { key: "5", value: "Miscellaneous" },
 ];
 
-const Products = () => {
-  const ELEMENTS_PER_PAGE: number = 6; //продуктов может быть много, нам надо только 6 показать
+const Products = observer(() => {
+  const productsStore = rootStore.productsStore;
 
-  const navigate = useNavigate();
+  const queryParamsStore = rootStore.queryParamsStore;
 
-  const location = useLocation(); //надо отслеживать номера страниц
-
-  const [productsArray, setProductsArray] = useState<Product[]>([]);
-  const [productsCount, setProductsCount] = useState(0);
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate(); //для переключения страниц
 
   useEffect(() => {
-    const fetch = async () => {
-      const result = await getAllProducts({});
-      if (!result.isError)
-        setProductsCount(Math.ceil(result.data.length / ELEMENTS_PER_PAGE));
-    };
-    fetch();
-  }, []); //запускаем при загрузке
+    let categoryId = queryParamsStore.getValByKey("categoryId"); //там сложный тип, но нам нужна строка
+    if (typeof categoryId === "string") productsStore.setCategoryId(categoryId);
 
-  useEffect(() => {
-    let offset: number = 0;
-    let page_in_query: number = 1;
-    const query = new URLSearchParams(location.search);
-    if (query.has("page")) {
-      page_in_query = Number(query.get("page"));
-      if (page_in_query < 1)
-        setPage(1); //normalize page value
-      else if (productsCount > 0 && page_in_query > productsCount)
-        setPage(productsCount);
-      else setPage(page_in_query);
-      offset = ELEMENTS_PER_PAGE * (page_in_query - 1); //page1 == offset 0
-    }
+    let title = queryParamsStore.getValByKey("title");
+    if (typeof title === "string") productsStore.setTitle(title);
 
-    const fetch = async () => {
-      const result = await getAllProducts({
-        limit: ELEMENTS_PER_PAGE,
-        offset: offset,
-      });
+    let page = queryParamsStore.getValByKey("page");
+    if (typeof page === "string") productsStore.setPage(parseInt(page));
 
-      if (!result.isError) setProductsArray(result.data);
-      //теперь результаты надо положит в state
-      //и после этого компонент перевысветится
-      //то есть будет 2 рендера: начальный пустой и потом с данными
-      //на начальном можно было бы показать скелетоны
-    };
-    fetch();
-  }, [location]); //запускаем при изменении номера страницы
+    productsStore.makeSearch();
+  }, []); //зависимостей не ставим, теперь следит mobx
 
   return (
     <div className={styles.page}>
@@ -82,18 +53,40 @@ const Products = () => {
         <Input
           style={{ width: "1079px", marginRight: "20px" }}
           placeholder="Search product"
-          value=""
-          onChange={() => {}}
+          value={productsStore.inputText}
+          onChange={(val) => {
+            productsStore.setInputText(val);
+          }}
         />
-        <Button>Find now</Button>
+        <Button
+          onClick={() => {
+            queryParamsStore.setParam("title", productsStore.inputText); //  надо положить в url
+            productsStore.setTitle(productsStore.inputText);
+
+            productsStore.setPage(1);
+            queryParamsStore.setParam("page", "1"); //при новом поске надо показыать первую страницу
+
+            productsStore.makeSearch();
+          }}
+        >
+          Find now
+        </Button>
 
         <div className={styles.filterContainer}>
           <div className={styles.filter}>
             <Dropdown
               options={categories}
-              keySelected=""
+              keySelected={productsStore.categoryId}
               onChange={(val) => {
-                console.log(val);
+                //если категория осталась старой, то не надо делать поиск
+                if (val !== productsStore.categoryId) {
+                  productsStore.setCategoryId(val);
+                  queryParamsStore.setParam("categoryId", val); // и ещё надо положить в url
+
+                  productsStore.setPage(1);
+                  queryParamsStore.setParam("page", "1"); //при новом поиске надо показыать первую страницу
+                  productsStore.makeSearch();
+                }
               }}
             />
           </div>
@@ -101,12 +94,14 @@ const Products = () => {
 
         <div className={styles.total}>
           <span className={styles.totalPhrase}>Total Product</span>
-          <span className={styles.totalNumber}>{productsArray.length}</span>
+          <span className={styles.totalNumber}>
+            {productsStore.productsTotal}
+          </span>
         </div>
 
         <div className={styles.cards}>
           {/* и вот тут надо по 3 разложить наш массив и отображать карточки*/}
-          {productsArray.slice(0, ELEMENTS_PER_PAGE).map((elm) => (
+          {productsStore.productsArray.map((elm) => (
             <Card
               key={elm.id}
               captionSlot={elm.category.name}
@@ -115,17 +110,30 @@ const Products = () => {
               subtitle={elm.description}
               contentSlot={elm.price + "$"}
               onClick={() => navigate(`/product/${elm.id}`)}
+              actionSlot={
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation(); // при нажатии на кнопку карточку открывать не надо
+                  }}
+                >
+                  Add to cart
+                </Button>
+              }
             />
           ))}
         </div>
       </div>
       <Pagination
-        baseUrl={"/products?page="}
-        currentPage={page}
-        totalPages={productsCount}
+        currentPage={productsStore.page}
+        pagesTotal={productsStore.pagesTotal}
+        onClick={(val) => {
+          queryParamsStore.setParam("page", val.toString()); //  надо положить в url
+          productsStore.setPage(val); //положить в стор
+          productsStore.makeSearch(); //выполнить поиск
+        }}
       />
     </div>
   );
-};
+});
 
 export default Products;
