@@ -3,29 +3,34 @@
 .pagination {
   text-align: center;
 
-  a {
+  button,
+  span {
     display: inline-block;
     width: 32px;
     line-height: 48px;
     text-align: center;
     text-decoration: none;
     color: $text-primary;
+    margin-right: 5px;
+    margin-left: 5px;
+    outline: none;
+    border: none;
   }
-  a:hover {
+  button:hover {
     background-color: $button-primary-bg-hover;
     color: $text-primary;
   }
 
-  a.disabled,
-  a.disabled:hover {
+  button.disabled,
+  button.disabled:hover {
     background-color: $button-primary-bg-disabled;
   }
 
-  a.currentPage {
+  button.currentPage {
     background-color: $button-primary-bg;
     color: $button-primary-text;
   }
-  a * {
+  button * {
     vertical-align: middle;
   }
 }
